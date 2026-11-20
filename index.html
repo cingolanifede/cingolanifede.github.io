@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Federico Cingolani · AI Engineer</title>
+<meta name="description" content="Senior Full Stack Engineer building AI-powered applications with Node.js, TypeScript, React and Claude.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F2F4F1;
+  --surface: #FFFFFF;
+  --ink: #142019;
+  --muted: #4E5C54;
+  --line: #D6DDD8;
+  --green: #12704F;
+  --green-ink: #FFFFFF;
+  --pcb: #0E3B2E;
+  --pcb-2: #124A3A;
+  --copper: #C98A4B;
+  --pcb-text: #D9EADF;
+  --pcb-dim: #7FA593;
+  --ok: #4FD18B;
+  --radius-lg: 20px;
+  --radius-sm: 8px;
+  --display: "Bricolage Grotesque", "Instrument Sans", system-ui, sans-serif;
+  --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --max: 1160px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0C1410; --surface: #121D17; --ink: #E6EEE9; --muted: #9DB0A5;
+    --line: #23332A; --green: #3FB57F; --green-ink: #06140D;
+    --pcb: #0A2C22; --pcb-2: #0F3A2D;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0C1410; --surface: #121D17; --ink: #E6EEE9; --muted: #9DB0A5;
+  --line: #23332A; --green: #3FB57F; --green-ink: #06140D;
+  --pcb: #0A2C22; --pcb-2: #0F3A2D;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 400 17px/1.6 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 4px; }
+html[data-lang="es"] [lang="en"], html[data-lang="en"] [lang="es"] { display: none !important; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 16px; top: 16px; background: var(--surface); padding: 8px 12px; z-index: 99; }
+
+/* Nav */
+header.nav {
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav .wrap { display: flex; align-items: center; gap: 24px; height: 68px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 700 18px var(--display); }
+.brand svg { flex: none; }
+.nav ul { display: flex; gap: 22px; list-style: none; margin: 0 0 0 auto; padding: 0; }
+.nav ul a { text-decoration: none; color: var(--muted); font-weight: 500; font-size: 15px; }
+.nav ul a:hover { color: var(--ink); }
+.tools { display: flex; gap: 8px; align-items: center; }
+.seg { display: flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; background: var(--surface); }
+.seg button { border: 0; background: none; color: var(--muted); font: 600 13px var(--body); padding: 5px 10px; border-radius: 999px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.icon-btn { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; cursor: pointer; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+  font: 600 15px var(--body); padding: 12px 20px; border-radius: 999px; border: 1px solid transparent; cursor: pointer;
+}
+.btn-primary { background: var(--green); color: var(--green-ink); }
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-ghost { border-color: var(--line); background: var(--surface); }
+.btn-ghost:hover { border-color: var(--ink); }
+.nav .btn { padding: 9px 16px; font-size: 14px; }
+
+/* Hero */
+.hero { padding: 72px 0 96px; }
+.hero .wrap { display: grid; grid-template-columns: 1.6fr 1fr; gap: 56px; align-items: center; }
+h1 {
+  font: 800 clamp(52px, 8vw, 104px)/0.92 var(--display);
+  letter-spacing: -0.035em; margin: 0 0 24px;
+}
+.role { font: 600 clamp(20px, 2.2vw, 26px)/1.3 var(--display); margin: 0 0 18px; color: var(--green); }
+.lede { color: var(--muted); max-width: 66ch; margin: 0 0 32px; font-size: 18px; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+.socials { display: flex; gap: 10px; }
+.socials a { width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); }
+.socials a:hover { border-color: var(--ink); }
+
+/* Portrait */
+.portrait { position: relative; margin: 0; justify-self: end; width: min(100%, 360px); }
+.portrait::before {
+  content: ""; position: absolute; inset: 28px -20px -20px 28px;
+  background: var(--pcb); border-radius: var(--radius-lg);
+  background-image: radial-gradient(circle, var(--copper) 1.6px, transparent 2px);
+  background-size: 22px 22px; background-position: 6px 6px;
+  opacity: .95;
+}
+.portrait img {
+  position: relative; display: block; width: 100%; height: auto; aspect-ratio: 1;
+  object-fit: cover; border-radius: var(--radius-lg);
+  box-shadow: 0 30px 60px -30px rgba(14, 59, 46, .55);
+}
+
+/* Sections */
+section.block { padding: 96px 0; border-top: 1px solid var(--line); }
+.sec-head { display: grid; grid-template-columns: 280px 1fr; gap: 48px; margin-bottom: 48px; }
+h2 { font: 700 clamp(32px, 4vw, 46px)/1.05 var(--display); letter-spacing: -0.02em; margin: 0; }
+.sec-head p { color: var(--muted); margin: 6px 0 0; max-width: 60ch; }
+
+/* About */
+.about { display: grid; grid-template-columns: 280px 1fr; gap: 48px; }
+.about .prose p { margin: 0 0 18px; max-width: 64ch; font-size: 18px; }
+.about .prose p:first-child { font: 500 24px/1.4 var(--display); letter-spacing: -0.01em; }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 36px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.facts div { padding: 20px 22px; }
+.facts div + div { border-left: 1px solid var(--line); }
+.facts strong { display: block; font: 700 32px/1 var(--display); margin-bottom: 6px; }
+.facts span { color: var(--muted); font-size: 14px; }
+
+/* Experience timeline */
+.timeline { list-style: none; margin: 0; padding: 0; }
+.job { display: grid; grid-template-columns: 280px 1fr; gap: 48px; padding: 28px 0; border-top: 1px solid var(--line); }
+.job:first-child { border-top: 0; padding-top: 0; }
+.job time { color: var(--muted); font-size: 15px; display: block; }
+.job .where { font-size: 14px; color: var(--muted); }
+.job h3 { font: 700 22px/1.25 var(--display); margin: 0 0 4px; }
+.job h3 span, .job h3 .co { color: var(--green); }
+a.co { color: var(--green); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a.co:hover { text-decoration-thickness: 2px; }
+.job ul { margin: 12px 0 0; padding-left: 18px; color: var(--muted); max-width: 70ch; }
+.job li { margin-bottom: 6px; }
+.earlier { margin-top: 12px; padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; display: grid; grid-template-columns: 280px 1fr; gap: 48px; }
+.earlier h3 { font: 700 18px var(--display); margin: 0; }
+.earlier ul { margin: 0; padding-left: 18px; color: var(--muted); }
+
+/* Projects */
+.projects { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; }
+.proj { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; }
+.proj.feature { grid-row: span 2; background: var(--pcb); color: var(--pcb-text); border-color: var(--pcb); }
+.proj.feature p, .proj.feature .meta { color: var(--pcb-dim); }
+.shot { display: block; width: calc(100% + 56px); margin: -28px -28px 22px; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; border-bottom: 1px solid var(--line); border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+.proj.feature .shot { border-bottom-color: var(--pcb-2); }
+.proj { overflow: hidden; }
+svg.dg { background: var(--bg); height: auto; }
+.proj.feature a.co { color: var(--copper); }
+.dg-box { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+.dg-box.strong { fill: var(--pcb); stroke: var(--pcb); }
+.dg-t { font: 600 15px var(--body); fill: var(--ink); text-anchor: middle; }
+.dg-s { font: 400 12px var(--body); fill: var(--muted); text-anchor: middle; }
+.dg-box.strong + .dg-t { fill: #fff; }
+.dg-box.strong + .dg-t + .dg-s { fill: var(--pcb-dim); }
+.dg-l path { stroke: var(--copper); stroke-width: 2; fill: none; }
+.dg-p circle { fill: var(--copper); }
+.proj .meta { font-size: 14px; color: var(--muted); margin: 0 0 10px; }
+.proj h3 { font: 700 26px/1.15 var(--display); margin: 0 0 12px; letter-spacing: -0.01em; }
+.proj.feature h3 { font-size: 34px; color: #fff; }
+.proj p { color: var(--muted); margin: 0 0 18px; }
+.flow { margin: 8px 0 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font: 500 13px var(--mono); }
+.flow span { border: 1px solid var(--copper); color: var(--copper); padding: 5px 10px; border-radius: 6px; }
+.flow i { width: 18px; height: 1px; background: var(--copper); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding: 0; list-style: none; }
+.tags li { font-size: 13px; padding: 4px 10px; border-radius: 999px; background: var(--bg); color: var(--muted); }
+.proj.feature .tags li { background: var(--pcb-2); color: var(--pcb-text); }
+
+/* Stack */
+.stack { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+.stack div { padding: 24px 24px 24px 0; border-bottom: 1px solid var(--line); }
+.stack div:nth-child(3n+2), .stack div:nth-child(3n) { padding-left: 24px; border-left: 1px solid var(--line); }
+.stack h3 { font: 700 18px var(--display); margin: 0 0 8px; }
+.stack p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+/* Education */
+.edu { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.edu article { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); }
+.edu h3 { font: 700 22px/1.2 var(--display); margin: 0 0 6px; }
+.edu p { margin: 0 0 4px; color: var(--muted); }
+.edu a { color: var(--green); font-weight: 600; }
+
+/* Contact */
+.contact { background: var(--ink); color: var(--bg); border-radius: 28px; padding: 64px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: end; }
+.contact h2 { font-size: clamp(36px, 5vw, 60px); }
+.contact p { color: color-mix(in srgb, var(--bg) 70%, transparent); max-width: 44ch; }
+.contact .links { display: grid; gap: 10px; }
+.contact .links a { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid color-mix(in srgb, var(--bg) 22%, transparent); text-decoration: none; font-weight: 500; }
+.contact .links a:hover { color: var(--copper); }
+.contact .links small { opacity: .65; }
+footer { padding: 40px 0 56px; color: var(--muted); font-size: 14px; }
+
+@media (max-width: 960px) {
+  .nav ul { display: none; }
+  .tools { margin-left: auto; }
+  .hero .wrap, .sec-head, .about, .job, .earlier, .projects, .edu, .contact { grid-template-columns: 1fr; gap: 24px; }
+  .proj.feature { grid-row: auto; }
+  .portrait { justify-self: start; width: min(100% - 20px, 300px); }
+  .stack { grid-template-columns: 1fr; }
+  .stack div, .stack div:nth-child(3n+2), .stack div:nth-child(3n) { padding: 20px 0; border-left: 0; }
+  .contact { padding: 36px 24px; }
+}
+@media (max-width: 560px) {
+  .wrap { padding: 0 16px; }
+  .nav .btn span, .brand b { display: none; }
+  .facts { grid-template-columns: 1fr; }
+  .facts div + div { border-left: 0; border-top: 1px solid var(--line); }
+  section.block { padding: 64px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main"><span lang="es">Saltar al contenido</span><span lang="en">Skip to content</span></a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="Federico Cingolani">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+        <rect width="34" height="34" rx="9" fill="#0E3B2E"/>
+        <path d="M8 24V10h7M8 17h5M26 10h-7v14h5" stroke="#C98A4B" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="25.5" cy="24" r="2.4" fill="#C98A4B"/>
+      </svg>
+      <b>Federico Cingolani</b>
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#about"><span lang="es">Sobre mí</span><span lang="en">About</span></a></li>
+        <li><a href="#experience"><span lang="es">Experiencia</span><span lang="en">Experience</span></a></li>
+        <li><a href="#projects"><span lang="es">Proyectos</span><span lang="en">Projects</span></a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#contact"><span lang="es">Contacto</span><span lang="en">Contact</span></a></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <div class="seg" role="group" aria-label="Language">
+        <button type="button" data-set-lang="es" aria-pressed="true">ES</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="icon-btn" type="button" id="theme" aria-label="Toggle dark mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <a class="btn btn-primary" href="Federico_Cingolani_AI_Engineer.pdf" download>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+        <span>CV</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="home">
+    <div class="wrap">
+      <div>
+        <h1>Federico<br>Cingolani</h1>
+        <p class="role"><span lang="es">Senior Full Stack Engineer, aplicaciones con IA</span><span lang="en">Senior Full Stack Engineer, AI-powered applications</span></p>
+        <p class="lede">
+          <span lang="es">Más de 10 años en ingeniería y más de 8 diseñando, construyendo y operando plataformas web en producción para fintech, salud digital, e-commerce e IoT. Claude Certified Developer especializado en llevar LLMs a producción: workflows agénticos con tool use, RAG, integraciones MCP y calidad basada en evaluaciones. Ingeniero Electrónico.</span>
+          <span lang="en">10+ years in engineering, including 8+ years designing, building and operating production-grade web platforms across fintech, digital health, e-commerce and IoT. Claude Certified Developer specializing in bringing LLM capabilities into production: agentic workflows with tool use, RAG, MCP integrations and evaluation-driven quality control. Electronic Engineer.</span>
+        </p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="#projects"><span lang="es">Ver proyectos</span><span lang="en">See projects</span></a>
+          <a class="btn btn-ghost" href="Federico_Cingolani_AI_Engineer.pdf" download><span lang="es">Descargar CV</span><span lang="en">Download CV</span></a>
+        </div>
+        <div class="socials">
+          <a href="https://github.com/cingolanifede" aria-label="GitHub" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>
+          </a>
+          <a href="https://linkedin.com/in/cingolanifederico" aria-label="LinkedIn" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21H9z"/></svg>
+          </a>
+          <a href="mailto:cingolanifede@gmail.com" aria-label="Email">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <figure class="portrait">
+        <img src="profile.png" width="480" height="480" alt="Federico Cingolani">
+      </figure>
+    </div>
+  </section>
+
+  <section class="block" id="about">
+    <div class="wrap about">
+      <h2><span lang="es">Sobre mí</span><span lang="en">About</span></h2>
+      <div class="prose">
+        <p lang="es">Experiencia profunda en Node.js, NestJS y TypeScript en el backend, React y Next.js en el frontend, y arquitecturas cloud-native y event-driven en AWS.</p>
+        <p lang="en">Deep expertise in Node.js, NestJS and TypeScript on the backend, React and Next.js on the frontend, and cloud-native, event-driven architectures on AWS.</p>
+        <p lang="es">Ownership del ciclo de entrega completo, desde el discovery técnico y la arquitectura hasta CI/CD, DevOps y soporte en producción, en equipos ágiles totalmente distribuidos. Inglés C1/C2.</p>
+        <p lang="en">Proven ownership of the full delivery lifecycle, from technical discovery and architecture to CI/CD, DevOps and production support, in fully distributed agile teams. C1/C2 English.</p>
+        <div class="facts">
+          <div><strong>10+</strong><span lang="es">años en ingeniería</span><span lang="en">years in engineering</span></div>
+          <div><strong>8+</strong><span lang="es">años en software en producción</span><span lang="en">years shipping production software</span></div>
+          <div><strong>C1/C2</strong><span lang="es">inglés profesional</span><span lang="en">professional English</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="experience">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2><span lang="es">Experiencia</span><span lang="en">Experience</span></h2>
+        <p><span lang="es">Remoto desde Mar del Plata para equipos de LATAM, EE. UU. y Europa.</span><span lang="en">Remote from Mar del Plata, for teams across LATAM, the US and Europe.</span></p>
+      </div>
+      <ol class="timeline" reversed>
+        <li class="job">
+          <div><time><span lang="es">Ene 2025 – hoy</span><span lang="en">Jan 2025 – now</span></time><span class="where">Freelance</span></div>
+          <div>
+            <h3>AI Engineer &amp; Senior Full Stack <span>Independiente</span></h3>
+            <ul lang="es">
+              <li>Productos de punta a punta para clientes internacionales: servicios en NestJS, frontends en Next.js sobre Vercel e infraestructura en AWS.</li>
+              <li>Features con Claude API para <a class="co" href="https://www.patagonian.com" target="_blank" rel="noopener">Patagonian</a>: agentes con tool calling, RAG sobre documentos del cliente y pipelines de salida estructurada, con sets de evaluación antes de cada release.</li>
+              <li>Asesoría en arquitectura, performance y costos de nube; introduje CI/CD y tests con Jest en proyectos que no tenían.</li>
+            </ul>
+            <ul lang="en">
+              <li>End-to-end products for international clients: NestJS services, Next.js frontends on Vercel and AWS infrastructure.</li>
+              <li>Claude API features for <a class="co" href="https://www.patagonian.com" target="_blank" rel="noopener">Patagonian</a>: tool-calling agents, RAG over client documents and structured-output pipelines, with eval sets before each release.</li>
+              <li>Advise on architecture, performance and cloud cost; introduced CI/CD and Jest testing on projects that had none.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="job">
+          <div><time><span lang="es">Ene 2025 – Ene 2026</span><span lang="en">Jan 2025 – Jan 2026</span></time><span class="where"><span lang="es">Salud digital</span><span lang="en">Digital health</span></span></div>
+          <div>
+            <h3>Senior Full Stack Engineer <a class="co" href="https://www.aevahealth.com" target="_blank" rel="noopener">AEVA Health</a></h3>
+            <ul lang="es">
+              <li>Diseñé el pipeline RAG del chat de salud: ingesta de contenido médico, búsqueda vectorial, respuestas con citas y guardrails de alcance clínico.</li>
+              <li>APIs REST y GraphQL compatibles con HIPAA: cifrado, RBAC, audit logging y minimización de PHI en los prompts.</li>
+              <li>Stack completo: backend NestJS, frontend React en Vercel, CI/CD con Jest como gate de cada release.</li>
+            </ul>
+            <ul lang="en">
+              <li>Designed the RAG pipeline behind the health chat: medical content ingestion, vector search, cited answers and clinical-scope guardrails.</li>
+              <li>HIPAA-compliant REST and GraphQL APIs: encryption, RBAC, audit logging and PHI minimization in prompts.</li>
+              <li>Owned the full stack: NestJS backend, React frontend on Vercel, CI/CD with Jest gating every release.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="job">
+          <div><time><span lang="es">Jul 2024 – Ene 2025</span><span lang="en">Jul 2024 – Jan 2025</span></time><span class="where">Fintech</span></div>
+          <div>
+            <h3>Full Stack Engineer <a class="co" href="https://xepelin.com" target="_blank" rel="noopener">Xepelin</a></h3>
+            <ul lang="es"><li>Features full stack en Node.js y React para una plataforma financiera B2B; pipelines CI/CD con Docker y Jenkins.</li></ul>
+            <ul lang="en"><li>Full stack features in Node.js and React for a B2B financial platform; CI/CD pipelines with Docker and Jenkins.</li></ul>
+          </div>
+        </li>
+        <li class="job">
+          <div><time><span lang="es">May 2023 – Jun 2024</span><span lang="en">May 2023 – Jun 2024</span></time><span class="where"><span lang="es">Consultoría</span><span lang="en">Consulting</span></span></div>
+          <div>
+            <h3>Senior Full Stack Engineer <a class="co" href="https://ayi.group" target="_blank" rel="noopener">AYI Group</a></h3>
+            <ul lang="es"><li>Microservicios event-driven en AWS (Lambda, SQS, SNS, S3) con NestJS para varios clientes, más apps React y paneles internos.</li></ul>
+            <ul lang="en"><li>Event-driven microservices on AWS (Lambda, SQS, SNS, S3) with NestJS for several clients, plus React apps and internal admin panels.</li></ul>
+          </div>
+        </li>
+        <li class="job">
+          <div><time><span lang="es">Mar 2023 – Jul 2023</span><span lang="en">Mar 2023 – Jul 2023</span></time><span class="where">EdTech</span></div>
+          <div>
+            <h3>Backend Engineer <a class="co" href="https://www.coderhouse.com" target="_blank" rel="noopener">Coderhouse</a></h3>
+            <ul lang="es"><li>APIs REST y microservicios en AWS; estabilicé sistemas legacy corrigiendo bugs críticos y cuellos de botella.</li></ul>
+            <ul lang="en"><li>REST APIs and AWS microservices; stabilized legacy systems by fixing critical bugs and bottlenecks.</li></ul>
+          </div>
+        </li>
+      </ol>
+      <div class="earlier">
+        <h3><span lang="es">Antes</span><span lang="en">Earlier</span></h3>
+        <ul lang="es">
+          <li>Pandodev (2021–2023), Outside The Cube (2020–2021), Homein Think Smart (2020): NestJS, Next.js, e-commerce con Stripe, IoT con MQTT.</li>
+          <li><a class="co" href="https://www.halliburton.com" target="_blank" rel="noopener">Halliburton</a> (2015–2020), Field Service Representative en oil &amp; gas.</li>
+          <li>FG Ingeniería (2013–2015), automatización con PLC y SCADA.</li>
+        </ul>
+        <ul lang="en">
+          <li>Pandodev (2021–2023), Outside The Cube (2020–2021), Homein Think Smart (2020): NestJS, Next.js, Stripe e-commerce, MQTT-based IoT.</li>
+          <li><a class="co" href="https://www.halliburton.com" target="_blank" rel="noopener">Halliburton</a> (2015–2020), Field Service Representative in oil &amp; gas.</li>
+          <li>FG Ingeniería (2013–2015), PLC and SCADA automation.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2><span lang="es">Proyectos</span><span lang="en">Projects</span></h2>
+        <p><span lang="es">Sistemas que diseñé y llevé a producción.</span><span lang="en">Systems I designed and took to production.</span></p>
+      </div>
+      <div class="projects">
+        <article class="proj feature">
+          <img class="shot" src="img/aeva.jpg" alt="AEVA Health app: AI health coach chat" loading="lazy" width="900" height="517">
+          <p class="meta"><a class="co" href="https://www.aevahealth.com" target="_blank" rel="noopener">AEVA Health</a></p>
+          <h3><span lang="es">Chat de salud con respuestas citadas</span><span lang="en">Health chat with cited answers</span></h3>
+          <p><span lang="es">Un asistente que responde preguntas médicas solo con contenido verificado, cita sus fuentes y se niega a salir del alcance clínico. Los datos del paciente nunca llegan crudos al modelo.</span><span lang="en">An assistant that answers medical questions from verified content only, cites its sources and refuses to leave clinical scope. Patient data never reaches the model unredacted.</span></p>
+          <div class="flow" aria-label="Pipeline">
+            <span>ingest</span><i></i><span>embed</span><i></i><span>pgvector</span><i></i><span>Claude</span><i></i><span>guardrails</span>
+          </div>
+          <ul class="tags"><li>RAG</li><li>Claude API</li><li>NestJS</li><li>HIPAA</li><li>GraphQL</li></ul>
+        </article>
+        <article class="proj">
+          <svg class="shot dg" viewBox="0 0 640 360" role="img" aria-label="Agent architecture: user request, Claude agent calling tools through MCP, structured output checked by evals"><g class="dg-l"><path d="M140 180h50"/><path d="M330 180h50"/><path d="M260 152V96h180V84"/><path d="M260 208v56h180v12"/><path d="M520 180h0"/></g><g class="dg-p"><circle cx="190" cy="180" r="4"/><circle cx="380" cy="180" r="4"/><circle cx="440" cy="84" r="4"/><circle cx="440" cy="276" r="4"/></g><g><rect class="dg-box" x="20" y="152" width="120" height="56" rx="10"/><text class="dg-t" x="80.0" y="176">Request</text><text class="dg-s" x="80.0" y="194">user / system</text></g><g><rect class="dg-box strong" x="190" y="152" width="140" height="56" rx="10"/><text class="dg-t" x="260.0" y="176">Claude agent</text><text class="dg-s" x="260.0" y="194">tool use loop</text></g><g><rect class="dg-box" x="380" y="28" width="240" height="56" rx="10"/><text class="dg-t" x="500.0" y="52">MCP tools</text><text class="dg-s" x="500.0" y="70">CRM · docs · database</text></g><g><rect class="dg-box" x="380" y="152" width="240" height="56" rx="10"/><text class="dg-t" x="500.0" y="176">Structured output</text><text class="dg-s" x="500.0" y="194">JSON schema</text></g><g><rect class="dg-box" x="380" y="276" width="240" height="56" rx="10"/><text class="dg-t" x="500.0" y="300">Evals</text><text class="dg-s" x="500.0" y="318">before every release</text></g></svg>
+          <p class="meta"><a class="co" href="https://www.patagonian.com" target="_blank" rel="noopener">Patagonian</a></p>
+          <h3><span lang="es">Agentes con tool calling</span><span lang="en">Tool-calling agents</span></h3>
+          <p><span lang="es">Agentes que consultan sistemas del cliente y devuelven salida estructurada, medidos con sets de evaluación antes de cada release.</span><span lang="en">Agents that query client systems and return structured output, measured with eval sets before each release.</span></p>
+          <ul class="tags"><li>Agents</li><li>MCP</li><li>Evals</li><li>TypeScript</li></ul>
+        </article>
+        <article class="proj">
+          <svg class="shot dg" viewBox="0 0 640 360" role="img" aria-label="Event-driven AWS architecture: API, Lambda publishing to SNS, fanned out to SQS queues consumed by Lambda workers writing to S3"><g class="dg-l"><path d="M130 180h30"/><path d="M270 180h30"/><path d="M380 180h20V96h20"/><path d="M380 180h20v84h20"/><path d="M520 96h20"/><path d="M520 264h20"/></g><g class="dg-p"><circle cx="160" cy="180" r="4"/><circle cx="300" cy="180" r="4"/><circle cx="420" cy="96" r="4"/><circle cx="420" cy="264" r="4"/></g><g><rect class="dg-box" x="20" y="152" width="110" height="56" rx="10"/><text class="dg-t" x="75.0" y="176">API</text><text class="dg-s" x="75.0" y="194">NestJS</text></g><g><rect class="dg-box strong" x="160" y="152" width="110" height="56" rx="10"/><text class="dg-t" x="215.0" y="176">Lambda</text><text class="dg-s" x="215.0" y="194">producer</text></g><g><rect class="dg-box" x="300" y="152" width="80" height="56" rx="10"/><text class="dg-t" x="340.0" y="176">SNS</text><text class="dg-s" x="340.0" y="194">topic</text></g><g><rect class="dg-box" x="420" y="68" width="100" height="56" rx="10"/><text class="dg-t" x="470.0" y="92">SQS</text><text class="dg-s" x="470.0" y="110">queue A</text></g><g><rect class="dg-box" x="420" y="236" width="100" height="56" rx="10"/><text class="dg-t" x="470.0" y="260">SQS</text><text class="dg-s" x="470.0" y="278">queue B</text></g><g><rect class="dg-box" x="540" y="68" width="84" height="56" rx="10"/><text class="dg-t" x="582.0" y="92">Lambda</text><text class="dg-s" x="582.0" y="110">worker</text></g><g><rect class="dg-box" x="540" y="236" width="84" height="56" rx="10"/><text class="dg-t" x="582.0" y="260">S3</text><text class="dg-s" x="582.0" y="278">storage</text></g></svg>
+          <p class="meta"><a class="co" href="https://ayi.group" target="_blank" rel="noopener">AYI Group</a></p>
+          <h3><span lang="es">Microservicios event-driven en AWS</span><span lang="en">Event-driven microservices on AWS</span></h3>
+          <p><span lang="es">Servicios desacoplados con colas y eventos para varios clientes, con CI/CD y suites de Jest.</span><span lang="en">Decoupled services built on queues and events for several clients, with CI/CD and Jest suites.</span></p>
+          <ul class="tags"><li>Lambda</li><li>SQS</li><li>SNS</li><li>NestJS</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="stack">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Stack</h2>
+        <p><span lang="es">Lo que uso a diario, agrupado por capa.</span><span lang="en">What I use day to day, grouped by layer.</span></p>
+      </div>
+      <div class="stack">
+        <div><h3>AI &amp; LLM</h3><p>Claude API, tool use, structured outputs, prompt caching, agents, MCP, RAG, pgvector, evals, Claude Code</p></div>
+        <div><h3>Backend</h3><p>Node.js, NestJS, Express, REST, GraphQL, WebSockets, microservices, event-driven</p></div>
+        <div><h3>Frontend</h3><p>React, Next.js, React Native, Ionic, Tailwind CSS</p></div>
+        <div><h3><span lang="es">Datos</span><span lang="en">Data</span></h3><p>PostgreSQL, MySQL, MongoDB, Oracle, Prisma, TypeORM, Sequelize</p></div>
+        <div><h3>Cloud &amp; DevOps</h3><p>AWS (Lambda, SQS, SNS, S3, EKS), Vercel, Serverless, Docker, GitHub Actions, Jenkins</p></div>
+        <div><h3><span lang="es">Calidad</span><span lang="en">Quality</span></h3><p>TypeScript, Jest (unit, integration, E2E), code review, Agile, mentoring</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="education">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2><span lang="es">Formación</span><span lang="en">Education</span></h2>
+      </div>
+      <div class="edu">
+        <article>
+          <h3>Claude Certified Developer, Foundations</h3>
+          <p>Anthropic, <span lang="es">sep 2026</span><span lang="en">Sep 2026</span></p>
+          <p><a href="https://credly.com/badges/25d86321-6024-4c5d-bb5a-e267b3361462" target="_blank" rel="noopener"><span lang="es">Ver credencial</span><span lang="en">View credential</span></a></p>
+        </article>
+        <article>
+          <h3><span lang="es">Ingeniería Electrónica</span><span lang="en">Electronic Engineering</span></h3>
+          <p><span lang="es">Universidad Nacional de Mar del Plata</span><span lang="en">National University of Mar del Plata</span></p>
+          <p><span lang="es">Español nativo, inglés C1/C2</span><span lang="en">Native Spanish, C1/C2 English</span></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="contact">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <h2><span lang="es">Hablemos</span><span lang="en">Let's talk</span></h2>
+          <p><span lang="es">¿Querés sumar IA a tu producto o necesitás alguien que se haga cargo del stack completo? Escribime.</span><span lang="en">Want to add AI to your product, or need someone to own the full stack? Get in touch.</span></p>
+        </div>
+        <div class="links">
+          <a href="mailto:cingolanifede@gmail.com">Email <small>cingolanifede@gmail.com</small></a>
+          <a href="https://linkedin.com/in/cingolanifederico" target="_blank" rel="noopener">LinkedIn <small>cingolanifederico</small></a>
+          <a href="https://github.com/cingolanifede" target="_blank" rel="noopener">GitHub <small>cingolanifede</small></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Federico Cingolani</div>
+</footer>
+
+<script>
+(function () {
+  const root = document.documentElement;
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* storage unavailable */ } }
+  };
+
+  function setLang(lang) {
+    root.dataset.lang = lang;
+    root.lang = lang;
+    document.querySelectorAll("[data-set-lang]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.setLang === lang));
+    });
+    store.set("lang", lang);
+  }
+  const savedLang = store.get("lang");
+  const browserLang = (navigator.language || "es").slice(0, 2) === "en" ? "en" : "es";
+  setLang(savedLang || browserLang);
+  document.querySelectorAll("[data-set-lang]").forEach(function (b) {
+    b.addEventListener("click", function () { setLang(b.dataset.setLang); });
+  });
+
+  const savedTheme = store.get("theme");
+  if (savedTheme) root.dataset.theme = savedTheme;
+  document.getElementById("theme").addEventListener("click", function () {
+    const isDark = root.dataset.theme
+      ? root.dataset.theme === "dark"
+      : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const next = isDark ? "light" : "dark";
+    root.dataset.theme = next;
+    store.set("theme", next);
+  });
+
+})();
+</script>
+</body>
+</html>

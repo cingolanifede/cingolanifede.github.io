@@ -102,16 +102,17 @@ h1 {
 /* Portrait */
 .portrait { position: relative; margin: 0; justify-self: end; width: min(100%, 360px); }
 .portrait::before {
-  content: ""; position: absolute; inset: 28px -20px -20px 28px;
-  background: var(--pcb); border-radius: var(--radius-lg);
-  background-image: radial-gradient(circle, var(--copper) 1.6px, transparent 2px);
-  background-size: 22px 22px; background-position: 6px 6px;
-  opacity: .95;
+  content: ""; position: absolute; inset: -12px;
+  border: 1.5px solid var(--copper); border-radius: 50%; opacity: .7;
+}
+.portrait::after {
+  content: ""; position: absolute; width: 12px; height: 12px; right: 9%; top: 9%;
+  background: var(--copper); border: 3px solid var(--bg); border-radius: 50%;
 }
 .portrait img {
   position: relative; display: block; width: 100%; height: auto; aspect-ratio: 1;
-  object-fit: cover; border-radius: var(--radius-lg);
-  box-shadow: 0 30px 60px -30px rgba(14, 59, 46, .55);
+  object-fit: cover; border-radius: 50%;
+  box-shadow: 0 24px 48px -24px rgba(14, 59, 46, .45);
 }
 
 /* Sections */
@@ -229,8 +230,7 @@ footer { padding: 40px 0 56px; color: var(--muted); font-size: 14px; }
     <a class="brand" href="#home" aria-label="Federico Cingolani">
       <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
         <rect width="34" height="34" rx="9" fill="#0E3B2E"/>
-        <path d="M8 24V10h7M8 17h5M26 10h-7v14h5" stroke="#C98A4B" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="25.5" cy="24" r="2.4" fill="#C98A4B"/>
+        <path d="M8 24V10h6M8 17h5M27 12.5A6 6 0 1 0 27 21.5" stroke="#C98A4B" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       <b>Federico Cingolani</b>
     </a>
